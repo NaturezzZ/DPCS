@@ -34,6 +34,8 @@ sudo apt-get install curl libnuma-dev libpcap-dev clang libclang-dev libssl-dev 
 sudo ./get-dpdk.sh
 ```
 Before running Kayak, you need to setup huge page:
+
 Edit `/etc/default/grub` , set `GRUB_CMDLINE_LINUX_DEFAULT="quiet splash iommu=pt intel_iommu=on default_hugepagesz=1GB hugepagesz=1G hugepages=16"`
+
 Edit `/etc/fstab` , add `nodev /mnt/huge hugetlbfs pagesize=1GB 0 0"`
 
