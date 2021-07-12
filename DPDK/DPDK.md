@@ -17,7 +17,7 @@ cd MLNX_OFED_LINUX-4.9-2.2.4.0-ubuntu18.04-x86_64
 sudo ./mlnxofedinstall --dpdk
 sudo /etc/init.d/openibd restart # load the new driver
 ```
-# DPDK Setup
+# DPDK Setup for Splinter/Kayak
 `~/.cargo/config`
 ```
 [source.crates-io]
@@ -28,8 +28,12 @@ replace-with = 'tuna'
 registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
 ```
 
-After that, install the dependencies and DPDK with the following commands
+Install the dependencies and DPDK with the following commands
 ```
 sudo apt-get install curl libnuma-dev libpcap-dev clang libclang-dev libssl-dev pkg-config numactl
 sudo ./get-dpdk.sh
 ```
+Before running Kayak, you need to setup huge page:
+Edit `/etc/default/grub` , set `GRUB_CMDLINE_LINUX_DEFAULT="quiet splash iommu=pt intel_iommu=on default_hugepagesz=1GB hugepagesz=1G hugepages=16"`
+Edit `/etc/fstab` , add `nodev /mnt/huge hugetlbfs pagesize=1GB 0 0"`
+
